@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = true;
 
@@ -32,4 +31,4 @@ recognition.onend = function() {
   recognition.start();
 };
 
->>>>>>> fbb10fbee058fbf9a67112b3f6662130378f4f9f
+

@@ -765,6 +765,11 @@ if (!window.clearImmediate) {
        calculate it's size and determine it's position, and actually
        put it on the canvas. */
     var putWord = function putWord(item) {
+      if(!item){
+        return false;
+      }
+
+      
       var word = item[0];
       var weight = item[1];
       var rotateDeg = getRotateDeg();
@@ -1009,13 +1014,13 @@ if (!window.clearImmediate) {
       $('#canvas-container span').remove();
 
       var timer = loopingFunction(function loop() {
-        if (i >= settings.list.length) {
-          stoppingFunction(timer);
-          sendEvent('wordcloudstop', false);
-          removeEventListener('wordcloudstart', anotherWordCloudStart);
+        // if (i >= settings.list.length) {
+        //   stoppingFunction(timer);
+        //   sendEvent('wordcloudstop', false);
+        //   removeEventListener('wordcloudstart', anotherWordCloudStart);
 
-          return;
-        }
+        //   return;
+        // }
         escapeTime = (new Date()).getTime();
         var drawn = putWord(settings.list[i]);
         var canceled = !sendEvent('wordclouddrawn', true, {
@@ -1028,7 +1033,10 @@ if (!window.clearImmediate) {
           removeEventListener('wordcloudstart', anotherWordCloudStart);
           return;
         }
-        i++;
+        if(settings.list.length>i){
+          i++;
+        }
+        
         timer = loopingFunction(loop, settings.wait);
       }, settings.wait);
     };
