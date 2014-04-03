@@ -21,6 +21,7 @@ recognition.onresult = function(event) {
   }
   for (var i = event.resultIndex; i < event.results.length; ++i) {
     recognized_text = event.results[i][0].transcript;
+    addWords(recognized_text);
     console.log(recognized_text);
   }
 };
@@ -30,3 +31,10 @@ recognition.onend = function() {
   recognition.start();
 };
 
+// Split all the words on spaces and add them to the cloud individually
+var addWords = function(words) {
+  words.split(" ").forEach(function(word) {
+    console.log(word);
+    // Cloud.addWord(word);
+  });
+};
