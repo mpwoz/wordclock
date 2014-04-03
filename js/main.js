@@ -1,3 +1,10 @@
+var transcript = '';
+
+var options = {
+    workerUrl: '/js/wordfreq.worker.js'
+};
+var wordfreq = WordFreq(options);
+
 var recognition = new webkitSpeechRecognition();
 recognition.continuous = true;
 
@@ -20,9 +27,9 @@ recognition.onresult = function(event) {
     return;
   }
   for (var i = event.resultIndex; i < event.results.length; ++i) {
-    recognized_text = event.results[i][0].transcript;
-    addWords(recognized_text);
-    console.log(recognized_text);
+    transcript += event.results[i][0].transcript;
+    addWords(transcript);
+    console.log(transcript);
   }
 };
 
@@ -33,8 +40,7 @@ recognition.onend = function() {
 
 // Split all the words on spaces and add them to the cloud individually
 var addWords = function(words) {
-  words.split(" ").forEach(function(word) {
-    console.log(word);
-    // Cloud.addWord(word);
+  wordfreq.process(words).getList(function(list) {
+    console.log(list);
   });
 };
