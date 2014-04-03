@@ -14,3 +14,11 @@ Note: if you get an SSL error, try running `generate_cert.sh` and following the
 prompts. This will generate a new certificate for the https server to use. This 
 is not secure, but it's necessary to avoid having to re-enable the microphone
 every few seconds (allowing the voice recognition to run continuously)
+
+
+## Team Members
+
+Greg Blaszczuk : Word cloud rendering, frequency calculation
+Martin Wozniewicz : Speech recognition, https server
+
+
