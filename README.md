@@ -1,6 +1,10 @@
-# Sound Cloud
+# Word Clock
 
-Voice recognition and visualization demo.
+Voice recognition and visualization clock based on 
+[https://github.com/gregblaszczuk/soundcloud](soundcloud).
+
+The clock displays the most common word for every minute and hour of the day,
+leave it running for extended periods of time for the best effect.
 
 
 ## Running locally
@@ -18,7 +22,7 @@ every few seconds (allowing the voice recognition to run continuously)
 
 ## Team Members
 
-Greg Blaszczuk : Word cloud rendering, frequency calculation
-Martin Wozniewicz : Speech recognition, https server
+Greg Blaszczuk : 
+Martin Wozniewicz : 
 
 
