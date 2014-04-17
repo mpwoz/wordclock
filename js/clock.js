@@ -1,26 +1,68 @@
-$(function () {
-  var updateTime = function () {
+var Clock = (function () {
+  // Initialize word frequency counter
+  var options = {
+      workerUrl: '/js/wordfreq.worker.js',
+      minimumCount:1
+  };
+  var hourFreq = WordFreq(options);
+  var minuteFreq = WordFreq(options);
+
+
+  // Initialize the current time
+  var now = new Date();
+  var lastHour = now.getHours();
+  var lastMinute = now.getMinutes();
+
+
+  var addWords = function (words) {
     var now = new Date();
-    
-    var hours = Math.round((now.getHours() % 12) * 30) + Math.floor(now.getMinutes() / 2);
-    var minutes = Math.round(now.getMinutes() * 6);
-    var seconds = Math.round(now.getSeconds() * 6);
-    if (seconds === 0) {
-      seconds = 360;
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+
+    console.log(minute);
+
+    // Reset the frequency counters if the time has changed
+    if (hour !== lastHour) {
+      hourFreq.empty();
+      lastHour = hour;
     }
-    
-    var duration = 200;
-         
-    $('.arrow-hour').transit({ rotate: hours }, duration, 'easeInOutQuart');
-    $('.arrow-minute').transit({ rotate: minutes }, duration, 'easeInOutQuart');
-    if (seconds === 6) {
-      $('.arrow-second').transit({ rotate: 6 }, 0, 'easeInOutQuart');
-      // Doesn't seem to work on CodePen?
-      //.transit({ rotate: seconds }, duration, 'easeInOutQuart');      
-    } else {
-      $('.arrow-second').transit({ rotate: seconds }, duration, 'easeInOutQuart');
+    if (minute !== lastMinute) {
+      minuteFreq.empty();
+      lastMinute = minute;
     }
+
+    minuteFreq.process(words).getList(function(list) {
+      console.log(list);
+      if (list.length > 0) {
+        // Set the minute div to the most frequent word
+        $('.m'+minute).html(
+          '<div class="word rotation">' + 
+          list[0][0] + 
+          '</div>'
+        );
+      }
+    });
+
+
+    hourFreq.process(words).getList(function(list) {
+      console.log(list);
+      if (list.length > 0) {
+        // Set the hour div to the most frequent word
+        $('.h'+hour).html(
+          '<div class="word rotation">' + 
+          list[0][0] + 
+          '</div>'
+        );
+      }
+    });
   };  
-  
-  setInterval(updateTime, 1000);
-});
+
+
+  return {
+    addWords: addWords,
+    say: function(w) {
+      console.log(w);
+    }
+  };
+
+})();
