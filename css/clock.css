@@ -45,16 +45,6 @@
   color: red !important;
 }
 
-/*.word {
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  margin-top: 0px;
-  margin-left: 0px;
-  left: 50%;
-  top: 50%;
-  color:white;
-}*/
 .tick .word {
   left: -12px;
   top: -100px;
@@ -68,8 +58,8 @@
 }
 
 .min .word {
-    left: -5;
-    top: -130px;
+    left: -5px;
+    top: -140px;
     font-size: 12px;
 }
 .word.rotation {

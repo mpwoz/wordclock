@@ -50,7 +50,7 @@ function runTest() {
     }
     word = testWords.pop();
     Clock.addWordsAtTime(word, h%12, m%60+1);
-    setTimeout(test, 400);
+    setTimeout(test, 300);
   }
   test();
 }
