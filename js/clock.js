@@ -12,57 +12,64 @@ var Clock = (function () {
   var now = new Date();
   var lastHour = now.getHours() % 12;
   var lastMinute = now.getMinutes();
-    console.log(lastHour, lastMinute);
-
 
   var addWords = function (words) {
     var now = new Date();
-    var hour = now.getHours() % 12;
-    var minute = now.getMinutes();
+    hour = now.getHours() % 12;
+    minute = now.getMinutes();
+    addWordsAtTime(words, hour, minute);
+  };
 
+
+  var addWordsAtTime = function (words, hour, minute) {
     // Reset the frequency counters if the time has changed
     if (hour !== lastHour) {
-      hourFreq.empty();
-      lastHour = hour;
+      console.log("Clearing Hours");
+      hourFreq.empty(function() {
+        lastHour = hour;
+        addWordsAtTime(words, hour, minute);
+      });
     }
-    if (minute !== lastMinute) {
-      minuteFreq.empty();
-      lastMinute = minute;
+    else if (minute !== lastMinute) {
+      console.log("Clearing minutes");
+      minuteFreq.empty(function() {
+        lastMinute = minute;
+        addWordsAtTime(words, hour, minute);
+      });
     }
-
-    minuteFreq.process(words).getList(function(list) {
-      console.log(list);
-      if (list.length > 0) {
-        // Set the minute div to the most frequent word
-        $('.m'+minute).html(
-          '<div class="word rotation">' + 
-          list[0][0] + 
-          '</div>'
-        );
-      }
-    });
-
-
-    hourFreq.process(words).getList(function(list) {
-      console.log(hour);
-      console.log(list);
-      if (list.length > 0) {
-        // Set the hour div to the most frequent word
-        $('.h'+hour).html(
-          '<div class="word rotation">' + 
-          list[0][0] + 
-          '</div>'
-        );
-      }
-    });
+    else {
+      console.log('Adding "', words, '" at Time ', hour, ":", minute);
+      minuteFreq.process(words, function(list) {
+        $('.min').removeClass('active');
+        if (list.length > 0) {
+          // Set the minute div to the most frequent word
+          $('.m'+minute)
+            .html(
+              '<div class="word rotation">' + 
+              list[0][0] + 
+              '</div>'
+            ).addClass('active');
+        }
+      });
+      hourFreq.process(words, function(list) {
+        $('.tick').removeClass('active');
+        if (list.length > 0) {
+          // Set the hour div to the most frequent word
+          $('.h'+hour)
+            .html(
+              '<div class="word rotation">' + 
+              list[0][0] + 
+              '</div>'
+            ).addClass('active');
+        }
+      });
+    } // else
   };  
 
 
   return {
     addWords: addWords,
-    say: function(w) {
-      console.log(w);
-    }
+    addWordsAtTime: addWordsAtTime
   };
 
 })();

@@ -22,7 +22,7 @@ every few seconds (allowing the voice recognition to run continuously)
 
 ## Team Members
 
-Greg Blaszczuk : 
-Martin Wozniewicz : 
+Greg Blaszczuk : Clock visualization, styling
+Martin Wozniewicz : Voice recognition, placing words on the clock face
 
 
