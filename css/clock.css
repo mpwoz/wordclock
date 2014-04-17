@@ -51,15 +51,17 @@
 }
 
 .word {
+  width: 10px;
+  height: 10px;
   font-family: 'Roboto', sans-serif;
     -webkit-backface-visibility: hidden;
     position: absolute;
-    font-size: 14px;
+    font-size: 10px;
 }
 
 .min .word {
     left: -5px;
-    top: -140px;
+    top: -150px;
     font-size: 12px;
 }
 .word.rotation {
