@@ -10,16 +10,15 @@ var Clock = (function () {
 
   // Initialize the current time
   var now = new Date();
-  var lastHour = now.getHours();
+  var lastHour = now.getHours() % 12;
   var lastMinute = now.getMinutes();
+    console.log(lastHour, lastMinute);
 
 
   var addWords = function (words) {
     var now = new Date();
-    var hour = now.getHours();
+    var hour = now.getHours() % 12;
     var minute = now.getMinutes();
-
-    console.log(minute);
 
     // Reset the frequency counters if the time has changed
     if (hour !== lastHour) {
@@ -45,6 +44,7 @@ var Clock = (function () {
 
 
     hourFreq.process(words).getList(function(list) {
+      console.log(hour);
       console.log(list);
       if (list.length > 0) {
         // Set the hour div to the most frequent word
