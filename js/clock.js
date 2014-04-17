@@ -16,12 +16,14 @@ var Clock = (function () {
   var addWords = function (words) {
     var now = new Date();
     hour = now.getHours() % 12;
+    hour = hour == 0 ? 12 : hour;
     minute = now.getMinutes();
     addWordsAtTime(words, hour, minute);
   };
 
 
   var addWordsAtTime = function (words, hour, minute) {
+    hour = hour == 0 ? 12 : hour;
     // Reset the frequency counters if the time has changed
     if (hour !== lastHour) {
       console.log("Clearing Hours");
