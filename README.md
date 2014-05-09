@@ -9,6 +9,20 @@ a demo of what it would look like over a prolonged period, run `runTest()`
 in the developer console of your browser.
 
 
+This demo has been tested and probably works best in Google Chrome.
+
+
+## Live Example
+
+See a live version of the site at 
+[https://mpwoz.github.io/wordclock/](https://mpwoz.github.io/wordclock/)
+
+
+Note: The `https` is important, as it prevents you from having to re-allow
+the microphone every few seconds. This is something we did to overcome the 
+speech recognition time limit imposed by the browser. 
+
+
 ## Running locally
 
 You'll need to have python installed, since the application requires an https server
