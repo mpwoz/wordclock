@@ -1,7 +1,7 @@
 var Clock = (function () {
   // Initialize word frequency counter
   var options = {
-      workerUrl: '/js/wordfreq.worker.js',
+      workerUrl: 'js/wordfreq.worker.js',
       minimumCount:1
   };
   var hourFreq = WordFreq(options);
