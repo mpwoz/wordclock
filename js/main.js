@@ -1,7 +1,7 @@
 // Ensure we are on https
-var host = "mpwoz.github.io";
-if ((host == window.location.host) && (window.location.protocol != "https:"))
-    window.location.protocol = "https";
+//var host = "mpwoz.github.io";
+//if ((host == window.location.host) && (window.location.protocol != "https:"))
+    //window.location.protocol = "https";
 
 
 var recognition = new webkitSpeechRecognition();
